@@ -1,0 +1,40 @@
+<h1>Welcome</h1>
+<hr />
+<p>
+	<%= form_tag 'upload', :multipart => true do %>
+   		<%= label_tag(:file, "Upload text File") %> 
+   		<br />
+   		<br />
+   		<%= file_field_tag(:file, :accept => 'text/plain') %>
+   		<%= submit_tag("Upload Dictionary", :id => "uploadDictionary") %>
+	<% end %>
+<p/>
+<% if @dictionary %>
+<hr />
+	<p> 
+		<%= "#{@dictionary[:filename]} loaded in #{@dictionary[:time_taken]}ms" %>
+		<br />
+		<br />
+		<%= form_tag "search_anagram", :method => :post do %>
+		  <%= label_tag(:wanted_anagram, "Search for:") %>
+		  <%= text_field_tag(:wanted_anagram) %>
+		  <%= submit_tag("Search") %>
+		<% end %>
+	<p/>
+	<hr />
+	<div class="output">
+		<% @dictionary.previous_searches.each do |anagram_result| %>
+			<%= anagram_result[:created_at] %>
+			<br />
+			<%= "#{anagram_result.result.length} anagrams found for '#{anagram_result[:wanted_anagram]}' in #{anagram_result[:time_taken]}ms" %>
+			<br />
+			<%= ">" if anagram_result[:result].length > 0 %> 
+			<% anagram_result[:result].each do |anagram| %>
+				<%= anagram %>				
+			<% end %>
+			<br />
+			<br />
+		<% end %>
+	</div>
+<% end %>
+
