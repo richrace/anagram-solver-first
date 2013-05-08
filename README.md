@@ -3,6 +3,8 @@ Anagram Solver
 
 This is a first attempt.
 
+[![Build Status](https://secure.travis-ci.org/richrace/anagram-solver-first.png)](http://travis-ci.org/richrace/anagram-solver-first/)
+
 To run do the following:
 
     bundle
